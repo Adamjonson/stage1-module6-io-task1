@@ -2,8 +2,11 @@ package com.epam.mjc.io;
 
 
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class FileReader {
+    Logger logger = Logger.getLogger(FileReader.class.getName());
 
 
     public Profile getDataFromFile(File file) {
@@ -32,9 +35,9 @@ public class FileReader {
             }
             return new Profile(arrOfStr[0], Integer.parseInt(arrOfStr[1]), arrOfStr[2], Long.parseLong(arrOfStr[3]));
 
-        } catch (Exception e) {
-        }
-        return new Profile();
+        } catch (IOException e){
+            logger.log(Level.INFO, "Error");
+        }        return new Profile();
     }
 
 }
