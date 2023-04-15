@@ -1,15 +1,17 @@
 package com.epam.mjc.io;
 
+
 import java.io.*;
 
 public class FileReader {
 
+
     public Profile getDataFromFile(File file) {
         StringBuilder stringBuilder = new StringBuilder();
-        String[] arrOfStr;
+        String[] arrOfStr = null;
 
-        String line = "";
-        try(BufferedReader reader = new BufferedReader(new java.io.FileReader(file))){
+        String line = null;
+        try (BufferedReader reader = new BufferedReader(new java.io.FileReader(file))) {
 
             String ls = System.getProperty("line.separator");
             while ((line = reader.readLine()) != null) {
@@ -20,22 +22,19 @@ public class FileReader {
 
             String str = stringBuilder.toString();
             arrOfStr = str.split("\r");
-            for (int i = 0; i< arrOfStr.length; i++){
+            for (int i = 0; i < arrOfStr.length; i++) {
 
                 String val = arrOfStr[i];
                 int spaceIndex = val.indexOf(" ");
-                String value = val.substring(spaceIndex+1, val.length());
+                String value = val.substring(spaceIndex + 1, val.length());
                 arrOfStr[i] = value;
 
             }
             return new Profile(arrOfStr[0], Integer.parseInt(arrOfStr[1]), arrOfStr[2], Long.parseLong(arrOfStr[3]));
-        }catch (Exception e){
-            System.out.println("File not found");
+
+        } catch (Exception e) {
         }
-
-
-
         return new Profile();
-}
+    }
 
 }
